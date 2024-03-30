@@ -22,7 +22,7 @@ for b=1:3
     end
 end
 
-fig = figure('Position',[10,10,700,900]);
+fig = figure('Position',[10,10,800,800]);
 set(gca,'FontSize',20)
 for b=1:3
     for c=1:3
@@ -30,10 +30,10 @@ for b=1:3
         subplot(3,3,k,'Parent',fig);
         imagesc(M_mean(:,:,end,k));
         if b==1
-            title('w = ' + string(w(c)));
+            title('$w = $' + string(w(c)), 'Interpreter','latex', 'FontSize',20);
         end
         if c==1
-            yl = ylabel('p = ' + string(p(b)),'FontWeight','bold');
+            yl = ylabel('$p_0 = $' + string(p(b)),'FontSize', 20,'FontWeight','bold', Interpreter='latex');
             yl.Position(1) = yl.Position(1) - 1;
         end
     end

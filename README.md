@@ -1,6 +1,7 @@
-# Embers-Wind-and-Fire
-Report for a joint project in Applied Mathematics
+# Embers, Wind and Fire
+by Jasmine Tai and Ananthajit ("Ananth") Srikanth
 
+Report and for a joint project in Applied Mathematics. You can find the report in this repository, or [here](https://drive.google.com/file/d/13_ZaqgONs5WBLl_1vnZ-ieGU_eXFDKRk/view?usp=drive_link.) 
 
 # Sections
 
