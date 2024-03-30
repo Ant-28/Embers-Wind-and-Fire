@@ -24,7 +24,9 @@ for b=1:3
     end
 end
 
-fig = figure('Position',[10,10,800,800]);
+% Create figure for 3x3 plot comparison
+
+fig = figure('Position',[10,10,700,900]);
 set(gca,'FontSize',20)
 
 for b=1:3
@@ -33,10 +35,10 @@ for b=1:3
         subplot(3,3,k,'Parent',fig);
         imagesc(M_mean(:,:,end,k));
         if b==1
-            title('$w = $' + string(w(c)), 'Interpreter','latex', 'FontSize',20);
+            title('$w = $' + string(w(c)));
         end
         if c==1
-            yl = ylabel('$p_0 = $' + string(p(b)),'FontSize', 20,'FontWeight','bold', Interpreter='latex');
+            yl = ylabel('p_0 = ' + string(p_0(b)),'FontWeight','bold');
             yl.Position(1) = yl.Position(1) - 1;
         end
     end
