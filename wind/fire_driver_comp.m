@@ -3,7 +3,7 @@ clc; clear; close all;
 % Parameters / initial condition
 maxr = 1000;
 maxt = 6;
-p = [0.2,0.3,0.4];
+p_0 = [0.2,0.3,0.4];
 n = 20;
 w = [0,20,40];
 a = 0.01;
@@ -12,18 +12,21 @@ M_init = zeros(n,n);
 M_init(10,10) = 1;
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% 
+
 % Initialize mean value matrix
+% We create nine of them to correspond to nine pairs of p and w
 M_mean = zeros(n,n,maxt,9);
 
+% Do fire propagation for nine cases
 for b=1:3
     for c=1:3
-        M_mean(:,:,:,3*(b-1)+c) = propagate_fire(p(b),n,maxt,maxr,w(c),theta,a,M_init);
+        M_mean(:,:,:,3*(b-1)+c) = propagate_fire(p_0(b),n,maxt,maxr,w(c),theta,a,M_init);
     end
 end
 
 fig = figure('Position',[10,10,800,800]);
 set(gca,'FontSize',20)
+
 for b=1:3
     for c=1:3
         k = 3*(b-1)+c;
@@ -43,44 +46,9 @@ h = axes(fig,'visible','off');
 c = colorbar(h,'Position',[0.93 0.168 0.022 0.7]);
 caxis(h,[0,1]);
 
-saveas(fig,'paper_param_comp','png');
+saveas(fig,'paper_param_comp','svg');
 
-% fig = figure('Position',[10,10,700,900]);
-
-% for c=1:3
-%     k = 3*(c-1)+1;
-%     subplot(3,3,k,'Parent',fig);
-%     imagesc(M_mean(:,:,2,c+3));
-%     if c==1
-%         title('t = 2');
-%     end
-%     yl = ylabel('w = ' + string(w(c)),'FontWeight','bold');
-%     xlabel('Tiles with 0.9+ value: ' + string(nnz(M_mean(:,:,2,c+3) >= 0.9)));
-%     yl.Position(1) = yl.Position(1) - 1;
-%     subplot(3,3,k+1,'Parent',fig);
-%     imagesc(M_mean(:,:,4,c+3));
-%     if c==1
-%         title('t = 4');
-%     end
-%     xlabel('Tiles with 0.9+ value: ' + string(nnz(M_mean(:,:,4,c+3) >= 0.9)));
-%     subplot(3,3,k+2,'Parent',fig);
-%     imagesc(M_mean(:,:,6,c+3));
-%     if c==1
-%         title('t = 6');
-%     end
-%     xlabel('Tiles with 0.9+ value: ' + string(nnz(M_mean(:,:,6,c+3) >= 0.9)));
-% end
-% 
-% h = axes(fig,'visible','off'); 
-% c = colorbar(h,'Position',[0.93 0.168 0.022 0.7]);
-% caxis(h,[0,1]);
-% 
-% saveas(fig,'paper_param_comp_likely','png');
-
-
-
-
-
+% Then create figure for looking at p_0=0.3 and w=0,20,40 over time
 
 fig = figure('Position',[10,10,800,550]);
 colors = ["b" "r" "#9248db"];

@@ -2,31 +2,28 @@ clear; close all; clc;
 
 DISPLAY_LOGS = false;
 
+% Common parameters
 maxr = 1000;
 maxt = 6;
-p = 0.3;
+p_0 = 0.3;
 n = 20;
-w = 0;
 a = 0.01;
-theta = pi/3;
 M_init = zeros(n,n);
 M_init(10,10) = 1;
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-M_mean = propagate_fire(p,n,maxt,maxr,w,theta,a,M_init);
-M_mean_2 = propagate_fire(p,n,maxt,maxr,40,pi/3,a,M_init);
-M_mean_3 = propagate_fire(p,n,maxt,maxr,20,-pi/2,a,M_init);
+% Compute 3 averaged results for fires with different w and theta
+M_mean = propagate_fire(p_0,n,maxt,maxr,0,pi/3,a,M_init);
+M_mean_2 = propagate_fire(p_0,n,maxt,maxr,40,pi/3,a,M_init);
+M_mean_3 = propagate_fire(p_0,n,maxt,maxr,20,-pi/2,a,M_init);
 
 if DISPLAY_LOGS
     disp('M_mean(:,:,end) =');
     disp(M_mean(:,:,end));
-    w_xy = [w*cos(theta);w*sin(theta)];
 end
 
-% make_movie(M_mean, ...
-% 'Fire propagation for p = 0.3, w = 40, theta = pi/3, a = 0.01', ...
-% 'testmovie.mp4')
+% Create figure for comparing 3 results
 set(groot,'DefaultAxesFontSize',22)
 fig = figure('Position',[10,10,900,250]);
 subplot(1,3,1);
